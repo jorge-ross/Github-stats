@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
 import { getGitProfile } from "../services/gitapi-service";
-import ProfileData from "../components/profile-data";
+import ProfileData from "./profile-data";
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   const [query, setQuery] = useState("");
-  const { state, setState } = useAuth();
+  const [state, setState] = useState({});
+
   const { status, data: profile, error } = state;
 
   useEffect(() => {
