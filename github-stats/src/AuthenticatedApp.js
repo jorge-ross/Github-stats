@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import styled from "@emotion/styled";
 
-import { useAuth } from "./context/auth-context";
 import SearchPage from "./pages/search-page";
 import FavoritesPage from "./pages/favorites-page";
 import {
@@ -10,21 +10,29 @@ import {
   getFavorites,
 } from "./services/favorites-service";
 
+const Div = styled("div")`
+  display: flex;
+  height: 731px;
+  width: 411px;
+  background-color: #f2f2f2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 function AuthenticatedApp() {
-  const { logout } = useAuth();
   const [favorites, setFavorites] = useState([]);
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     getFavorites().then(setFavorites);
   }, []);
 
-  function handleAddFavorite(pokemon) {
+  function handleAddFavorite(profile) {
     const data = {
-      pokemon_name: pokemon?.name,
-      pokemon_id: pokemon.id,
-      pokemon_type: pokemon.types[0].type?.name,
-      pokemon_avatar_url:
-        pokemon.sprites.other["official-artwork"].front_default,
+      name: profile.name,
+      username: profile.username,
+      avatar_url: profile.avatar_url,
     };
 
     createFavorite(data)
@@ -32,14 +40,12 @@ function AuthenticatedApp() {
       .catch(console.log);
   }
 
-  function handleRemoveFavorite(pokemon) {
-    const favorite = favorites.find(
-      (fav) => fav.pokemon_name === pokemon?.name
-    );
+  function handleRemoveFavorite(profile) {
+    const favorite = favorites.find((fav) => fav.username === profile?.name);
 
     removeFavorite(favorite.id).then(() => {
       const newFavorites = favorites.filter(
-        (fav) => fav.pokemon_name !== pokemon?.name
+        (fav) => fav.username !== profile?.name
       );
 
       setFavorites(newFavorites);
@@ -47,8 +53,7 @@ function AuthenticatedApp() {
   }
 
   return (
-    <div>
-      <button onClick={logout}>Logout</button>
+    <Div>
       <Routes>
         <Route
           path="/"
@@ -57,6 +62,7 @@ function AuthenticatedApp() {
               favorites={favorites}
               onAddFavorite={handleAddFavorite}
               onRemoveFavorite={handleRemoveFavorite}
+              onProfile={setProfile}
             />
           }
         />
@@ -64,8 +70,10 @@ function AuthenticatedApp() {
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}
         />
+        <Route path="users/:username"></Route>
+        <Route path="followers"></Route>
       </Routes>
-    </div>
+    </Div>
   );
 }
 

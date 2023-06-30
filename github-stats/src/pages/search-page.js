@@ -1,62 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
+import { getGitProfile } from "../services/gitapi-service";
+import ProfileData from "../components/profile-data";
 
-function SearchPage({ favorites, onAddFavorite, onRemoveFavorite }) {
+function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   const [query, setQuery] = useState("");
+  const { state, setState } = useAuth();
+  const { status, data: profile, error } = state;
 
-  const [state, setState] = useState({
-    status: "idle", // idle = inactive // success // error // pending
-    data: null,
-    error: null,
-  });
-
-  const { status, data: pokemon, error } = state;
-
-  const isFavorite = Boolean(
-    favorites.find((fav) => fav.pokemon_name === pokemon?.name)
-  );
-
-  function handleSubmit(event) {
-    event.preventDefault();
+  useEffect(() => {
+    if (query === "") return;
     setState({ status: "pending", data: null, error: null });
 
-    // eslint-disable-next-line no-undef
-    getPokemon(query)
+    getGitProfile(query)
       .then((data) => {
-        setState({ status: "success", data, error: null });
+        onProfile(data);
+        setState({ status: "success", data: data, error: null });
       })
-      .catch((_error) => {
+      .catch((error) => {
         setState({
           status: "error",
           data: null,
-          error: "El pokemon no existe! intente de nuevo",
+          error: error.message,
         });
       });
-  }
+  }, [query, onProfile, setState]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <Input
           name="query"
-          placeholder="pokemon name"
+          placeholder="username"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
-        <button>Search</button>
       </form>
-      {status === "pending" && "Loading..."}
-      {status === "idle" && "Ready to search"}
-      {status === "success" && (
-        // ProfileData
-        // eslint-disable-next-line react/jsx-no-undef
-        <PokemonData
-          pokemon={pokemon}
+      {status === "pending" && "Retrieving user..."}
+      {status === "success" && query !== "" && (
+        <ProfileData
+          profile={profile}
           onAddFavorite={onAddFavorite}
           onRemoveFavorite={onRemoveFavorite}
-          isFavorite={isFavorite}
+          favorites={favorites}
         />
       )}
       {status === "error" && <p style={{ color: "red" }}>{error}</p>}

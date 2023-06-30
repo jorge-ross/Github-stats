@@ -23,7 +23,7 @@ function UnauthenticatedApp() {
 
   return (
     <div>
-      <h1>Welcome to Poke Collection</h1>
+      <h1>Welcome to Github Stats</h1>
       {showLogin ? <LoginForm /> : <SignupForm />}
 
       <CustomLink onClick={handleLinkClick}>
