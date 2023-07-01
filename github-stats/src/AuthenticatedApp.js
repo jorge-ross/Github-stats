@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled from "@emotion/styled";
 
+import UpdateForm from "./components/update-form";
 import SearchPage from "./pages/search-page";
 import FavoritesPage from "./pages/favorites-page";
 import {
@@ -63,6 +64,7 @@ function AuthenticatedApp() {
             />
           }
         />
+        <Route path="profile" element={<UpdateForm />} />
         <Route
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}

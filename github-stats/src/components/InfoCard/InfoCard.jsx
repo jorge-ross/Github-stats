@@ -8,8 +8,8 @@ import {FaUsers} from 'react-icons/fa';
 import {RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill, RiStarFill, RiSearchFill, RiUser3Fill} from 'react-icons/ri'
 
 const Div = styled("div")`
-    width: 100%;
-    height: 100%;
+    width: 411px;
+    height: 731px;
     display: grid;
     place-items: center;
     gap: 16px;
@@ -146,10 +146,10 @@ function InfoCard({query, setQueryFunction}){
             </Stats>
             <ContainerBottom>
                 <ContainerItems>
-                    <Link to="/favorites">
+                    <Link to={"profile"}>
                         <RiUser3Fill color="#BDBDBD" size={50}></RiUser3Fill>
                     </Link>
-                    <Link to="/favorites">
+                    <Link to="/">
                         <RiSearchFill color="#BDBDBD" size={50}></RiSearchFill>
                     </Link>
                     <Link to="/favorites">
