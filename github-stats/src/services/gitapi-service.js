@@ -1,4 +1,4 @@
-const BASE_URI = "https://api.github.com/users/";
+export const BASE_URI = "https://api.github.com/users/";
 
 export async function getGitProfile(query) {
   let result = await fetch(BASE_URI + query);

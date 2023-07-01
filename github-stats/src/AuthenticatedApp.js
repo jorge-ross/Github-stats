@@ -31,7 +31,7 @@ function AuthenticatedApp() {
   function handleAddFavorite(profile) {
     const data = {
       name: profile.name,
-      username: profile.username,
+      username: profile.login,
       avatar_url: profile.avatar_url,
     };
 

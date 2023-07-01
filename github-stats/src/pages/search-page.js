@@ -4,6 +4,7 @@ import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
 import { getGitProfile } from "../services/gitapi-service";
 import ProfileData from "./profile-data";
+import InfoCard from "../components/InfoCard/InfoCard";
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   const [query, setQuery] = useState("");
@@ -51,6 +52,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
       {status === "error" && <p style={{ color: "red" }}>{error}</p>}
 
       <Link to="/favorites">Go to Favorites</Link>
+      <InfoCard />
     </div>
   );
 }
