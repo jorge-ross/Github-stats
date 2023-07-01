@@ -11,13 +11,10 @@ import {
 } from "./services/favorites-service";
 
 const Div = styled("div")`
-  display: flex;
+  display: grid;
   height: 731px;
   width: 411px;
-  background-color: #f2f2f2;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  justify-items: center;
 `;
 
 function AuthenticatedApp() {

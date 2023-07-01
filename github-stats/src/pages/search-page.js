@@ -32,14 +32,6 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
 
   return (
     <div>
-      <form>
-        <Input
-          name="query"
-          placeholder="username"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
-      </form>
       {status === "pending" && "Retrieving user..."}
       {status === "success" && query !== "" && (
         <ProfileData
@@ -50,9 +42,10 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
         />
       )}
       {status === "error" && <p style={{ color: "red" }}>{error}</p>}
-
-      <Link to="/favorites">Go to Favorites</Link>
-      <InfoCard />
+      <InfoCard
+        query={query}
+        setQueryFunction={(event) => setQuery(event.target.value)}
+      />
     </div>
   );
 }
