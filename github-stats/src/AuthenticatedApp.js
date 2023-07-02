@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import UpdateForm from "./components/update-form";
 import SearchPage from "./pages/search-page";
 import FavoritesPage from "./pages/favorites-page";
+import FollowersPage from "./pages/followers-page";
 import {
   createFavorite,
   removeFavorite,
@@ -12,7 +13,7 @@ import {
 } from "./services/favorites-service";
 
 const Div = styled("div")`
-  display: grid;
+  display: flex;
   height: 731px;
   width: 411px;
   justify-items: center;
@@ -69,8 +70,20 @@ function AuthenticatedApp() {
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}
         />
-        <Route path="users/:username"></Route>
-        <Route path="followers"></Route>
+        <Route path="/users/:username">
+          <Route
+            path="followers"
+            element={<FollowersPage profile={profile}></FollowersPage>}
+          />
+          <Route
+            path="followings"
+            // element={<FollowingPage profile={profile}></FollowingPage>}
+          />
+          <Route
+            path="repos"
+            // element={<RepoPage profile={profile}></RepoPage>}
+          />
+        </Route>
       </Routes>
     </Div>
   );

@@ -13,3 +13,9 @@ export async function getGitProfile(query) {
   }
   return data;
 }
+
+export async function getProfileFollowers(user, page) {
+  return fetch(BASE_URI + user + `/followers?per_page=7&page=${page}`).then(
+    (response) => response.json()
+  );
+}

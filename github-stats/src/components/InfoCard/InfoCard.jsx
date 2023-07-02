@@ -1,11 +1,12 @@
 import hitCardData from "../../services/hit-card-data"
 import { useState, useEffect } from "react"
+import { Routes, Route, Router } from "react-router-dom";
 import { Link } from "react-router-dom"
 import Input from "../input";
-
+import FollowersPage from "../../pages/followers-page";
 import styled from "@emotion/styled";
 import {FaUsers} from 'react-icons/fa';
-import {RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill, RiStarFill, RiSearchFill, RiUser3Fill} from 'react-icons/ri'
+import {RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill, RiStarFill, RiSearchFill, RiUser3Fill } from 'react-icons/ri'
 
 const Div = styled("div")`
     width: 411px;
@@ -84,7 +85,7 @@ const ContainerItems = styled("div")`
     flex-direction: row;
 `
 
-function InfoCard({query, setQueryFunction}){
+function InfoCard({profile, url, query, setQueryFunction}){
     
     const [data,setData] = useState("")
     useEffect(()=>{
@@ -96,6 +97,7 @@ function InfoCard({query, setQueryFunction}){
     console.log(data.bio)
     return(
         <Div>
+            
             <form>
                 <Input
                 name="query"
@@ -109,12 +111,16 @@ function InfoCard({query, setQueryFunction}){
             </ProfilePicture>
             <Name>
                 <h2>{data.name}</h2>
-                <span>X</span>
+                <RiStarFill />
             </Name>
             <div>
                 <p>{data.bio}</p>
             </div>
+          
             <Stats>
+              
+              
+                
                 <StatSon>
                     <ImgStat>
                         <FaUsers color="#2D9CDB" size={60}/>
@@ -122,6 +128,7 @@ function InfoCard({query, setQueryFunction}){
                     <NumStat>{data.followers}</NumStat>
                     <TextStat>followers</TextStat>
                 </StatSon>
+                
                 <StatSon>
                     <ImgStat>
                         <RiUserHeartFill color="#F2994A" size={60}/>
@@ -143,7 +150,9 @@ function InfoCard({query, setQueryFunction}){
                     <NumStat>{data.public_gists}</NumStat>
                     <TextStat>public gists</TextStat>
                 </StatSon>
+                
             </Stats>
+            
             <ContainerBottom>
                 <ContainerItems>
                     <Link to={"profile"}>
@@ -157,6 +166,7 @@ function InfoCard({query, setQueryFunction}){
                     </Link>
                 </ContainerItems>
             </ContainerBottom>
+            
         </Div>
     )
 }
