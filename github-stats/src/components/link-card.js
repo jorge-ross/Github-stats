@@ -22,11 +22,13 @@ const LinkContainer = styled(Link)`
 const NumStat = styled("p")`
   font.weight: 400;
   font-size: 28px;
+  line-height: normal;
 `;
 
 const Subtitle = styled("p")`
   font-weight: 400;
   font-size: 16px;
+  line-height: normal;
 `;
 
 const LinkCard = ({ icon, numStat, subtitle, url, color }) => {

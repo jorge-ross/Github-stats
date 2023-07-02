@@ -85,7 +85,7 @@ const ContainerItems = styled("div")`
     flex-direction: row;
 `
 
-function InfoCard({ profile, query, setQueryFunction}){
+function InfoCard({ query, setQueryFunction}){
     
     const [data,setData] = useState("")
     useEffect(()=>{
@@ -122,20 +122,21 @@ function InfoCard({ profile, query, setQueryFunction}){
             icon={<FaUsers />}
             subtitle={"followers"}
             numStat={data.followers}
+            url={`users/${data?.login}/followers`}
             color={"#2D9CDB"}
             />
             <LinkCard
             icon={<RiUserHeartFill />}
             subtitle={"followings"}
             numStat={data.following}
-            url={`users/${profile?.login}/followings`}
+            url={`users/${data?.login}/followings`}
             color={"#F2994A"}
             />
             <LinkCard
             icon={<RiBookMarkFill />}
             subtitle={"public repos"}
             numStat={data.public_repos}
-            url={`users/${profile?.login}/repos`}
+            url={`users/${data?.login}/repos`}
             color={"#219653"}
             />
             <LinkCard
