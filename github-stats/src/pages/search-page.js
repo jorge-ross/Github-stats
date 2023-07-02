@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
 import { getGitProfile } from "../services/gitapi-service";
-import InfoCard from "../components/InfoCard/InfoCard";
+import InfoCard from "./InfoCard";
 
 const Container = styled("div")`
   display: flex;

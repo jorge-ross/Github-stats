@@ -78,15 +78,15 @@ function AuthenticatedApp() {
         <Route path="/users/:username">
           <Route
             path="followers"
-            // element={<FollowersPage profile={profile}></FollowersPage>}
+            element={<FollowersPage profile={profile}></FollowersPage>}
           />
           <Route
             path="followings"
-            // element={<FollowingPage profile={profile}></FollowingPage>}
+            element={<FollowingPage profile={profile}></FollowingPage>}
           />
           <Route
             path="repos"
-            // element={<ReposPage profile={profile}></ReposPage>}
+            element={<ReposPage profile={profile}></ReposPage>}
           />
         </Route>
       </Routes>

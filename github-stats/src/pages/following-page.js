@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { typography } from "../styles";
 import { getProfileFollowings } from "../services/gitapi-service";
+import { GrFormPrevious, GrNext } from "react-icons/gr";
 
 const MainTitle = styled.h1`
   display: flex;
@@ -62,7 +63,7 @@ const Paging = styled.div`
   }
 `;
 
-const PagButton = styled.button`
+const PagingButton = styled.button`
   all: unset;
   text-align: center;
   color: ${({ current, children }) =>
@@ -88,14 +89,14 @@ function FollowingPage({ profile }) {
 
   const pageNumber = Math.ceil(profile.followers / 7);
 
-  function handleDecresePage() {
+  function handlePrevPage() {
     if (page === 1) return;
 
     const newPage = page - 1;
     setPage(newPage);
   }
 
-  function handleIncresePage() {
+  function handleNextPage() {
     if (page === pageNumber) return;
     const newPage = page + 1;
     setPage(newPage);
@@ -114,13 +115,15 @@ function FollowingPage({ profile }) {
       <MainTitle>Followings ({profile.following})</MainTitle>
 
       <Paging>
-        <img alt="" onClick={handleDecresePage} style={{ cursor: "pointer" }} />
-        {[...Array(pageNumber)].map((index) => (
-          <PagButton key={index} current={page}>
+        <GrFormPrevious size={16} onClick={handlePrevPage} />
+
+        {[...Array(pageNumber)].slice(0, 5).map((_, index) => (
+          <PagingButton key={index} current={page}>
             {index + 1}
-          </PagButton>
+          </PagingButton>
         ))}
-        <img alt="" onClick={handleIncresePage} style={{ cursor: "pointer" }} />
+
+        <GrNext size={16} onClick={handleNextPage} />
       </Paging>
 
       <FollowingContainer>

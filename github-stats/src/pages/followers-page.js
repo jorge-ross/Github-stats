@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { typography } from "../styles";
 import { useEffect, useState } from "react";
 import { getProfileFollowers } from "../services/gitapi-service";
+import { GrFormPrevious, GrNext } from "react-icons/gr";
 
 const Title = styled.h1`
   display: flex;
@@ -110,14 +111,15 @@ function FollowersPage({ profile }) {
     <Wrapper>
       <Title>Followers ({profile.followers})</Title>
       <Paging>
-        <img alt="" onClick={handlePrevPage} />
+        <GrFormPrevious size={16} onClick={handlePrevPage} />
 
-        {[...Array(pageNumber)].map((index) => (
+        {[...Array(pageNumber)].slice(0, 5).map((_, index) => (
           <PagingButton key={index} current={page}>
             {index + 1}
           </PagingButton>
         ))}
-        <img alt="" onClick={handleNextPage} />
+
+        <GrNext size={16} onClick={handleNextPage} />
       </Paging>
 
       <FollowersContainer>
