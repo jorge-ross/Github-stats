@@ -1,9 +1,9 @@
 import hitCardData from "../../services/hit-card-data"
 import { useState, useEffect } from "react"
-import { Routes, Route, Router } from "react-router-dom";
 import { Link } from "react-router-dom"
 import Input from "../input";
 import FollowersPage from "../../pages/followers-page";
+import LinkCard from "../link-card";
 import styled from "@emotion/styled";
 import {FaUsers} from 'react-icons/fa';
 import {RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill, RiStarFill, RiSearchFill, RiUser3Fill } from 'react-icons/ri'
@@ -85,7 +85,7 @@ const ContainerItems = styled("div")`
     flex-direction: row;
 `
 
-function InfoCard({profile, url, query, setQueryFunction}){
+function InfoCard({ profile, query, setQueryFunction}){
     
     const [data,setData] = useState("")
     useEffect(()=>{
@@ -96,8 +96,7 @@ function InfoCard({profile, url, query, setQueryFunction}){
     console.log(data.login)
     console.log(data.bio)
     return(
-        <Div>
-            
+        <Div>      
             <form>
                 <Input
                 name="query"
@@ -111,46 +110,41 @@ function InfoCard({profile, url, query, setQueryFunction}){
             </ProfilePicture>
             <Name>
                 <h2>{data.name}</h2>
-                <RiStarFill />
+                <ImgStat style={{ paddingLeft: '10px' }}> 
+                    <RiStarFill color="#2D9CDB" size={24}/>
+                </ImgStat>     
             </Name>
             <div>
                 <p>{data.bio}</p>
             </div>
-          
             <Stats>
-              
-              
-                
-                <StatSon>
-                    <ImgStat>
-                        <FaUsers color="#2D9CDB" size={60}/>
-                    </ImgStat>
-                    <NumStat>{data.followers}</NumStat>
-                    <TextStat>followers</TextStat>
-                </StatSon>
-                
-                <StatSon>
-                    <ImgStat>
-                        <RiUserHeartFill color="#F2994A" size={60}/>
-                    </ImgStat>
-                    <NumStat>{data.following}</NumStat>
-                    <TextStat>followings</TextStat>
-                </StatSon>
-                <StatSon>
-                    <ImgStat>
-                        <RiBookMarkFill color="#219653" size={60}></RiBookMarkFill>
-                    </ImgStat>
-                    <NumStat>{data.public_repos}</NumStat>
-                    <TextStat>public repos</TextStat>
-                </StatSon>
-                <StatSon>
-                    <ImgStat>
-                        <RiCodeBoxFill color="#828282" size={60}></RiCodeBoxFill>
-                    </ImgStat>
-                    <NumStat>{data.public_gists}</NumStat>
-                    <TextStat>public gists</TextStat>
-                </StatSon>
-                
+            <LinkCard
+            icon={<FaUsers />}
+            subtitle={"followers"}
+            numStat={data.followers}
+            color={"#2D9CDB"}
+            />
+            <LinkCard
+            icon={<RiUserHeartFill />}
+            subtitle={"followings"}
+            numStat={data.following}
+            url={`users/${profile?.login}/followings`}
+            color={"#F2994A"}
+            />
+            <LinkCard
+            icon={<RiBookMarkFill />}
+            subtitle={"public repos"}
+            numStat={data.public_repos}
+            url={`users/${profile?.login}/repos`}
+            color={"#219653"}
+            />
+            <LinkCard
+            icon={<RiCodeBoxFill />}
+            subtitle={"public gists"}
+            numStat={data.public_gists}
+            url={"/"}
+            color={"#828282"}
+            />
             </Stats>
             
             <ContainerBottom>
@@ -171,4 +165,4 @@ function InfoCard({profile, url, query, setQueryFunction}){
     )
 }
 
-export default InfoCard
+export default InfoCard;

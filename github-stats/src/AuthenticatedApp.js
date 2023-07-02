@@ -70,20 +70,7 @@ function AuthenticatedApp() {
           path="favorites"
           element={<FavoritesPage favorites={favorites} />}
         />
-        <Route path="/users/:username">
-          <Route
-            path="followers"
-            element={<FollowersPage profile={profile}></FollowersPage>}
-          />
-          <Route
-            path="followings"
-            // element={<FollowingPage profile={profile}></FollowingPage>}
-          />
-          <Route
-            path="repos"
-            // element={<RepoPage profile={profile}></RepoPage>}
-          />
-        </Route>
+        <Route path="/users/:username"></Route>
       </Routes>
     </Div>
   );
