@@ -28,3 +28,9 @@ export async function getProfileFollowings(user, page) {
     (response) => response.json()
   );
 }
+
+export async function getRepos(url, page) {
+  return fetch(url + `?per_page=7&page=${page}`).then((response) =>
+    response.json()
+  );
+}
