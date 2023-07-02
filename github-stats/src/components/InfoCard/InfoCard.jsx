@@ -1,8 +1,8 @@
-import hitCardData from "../../services/hit-card-data"
+import { getGitProfile } from "../../services/gitapi-service";
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Input from "../input";
-import FollowersPage from "../../pages/followers-page";
+import ProfileData from "../../pages/profile-data"
 import LinkCard from "../link-card";
 import styled from "@emotion/styled";
 import {FaUsers} from 'react-icons/fa';
@@ -85,12 +85,41 @@ const ContainerItems = styled("div")`
     flex-direction: row;
 `
 
-function InfoCard({ query, setQueryFunction}){
+const Img = styled("img")`
+  witdh: 7.5rem;
+  height: 7.5rem;
+`;
+
+function InfoCard({ 
+    setQueryFunction,
+    favorites, 
+    onAddFavorite, 
+    onRemoveFavorite, 
+    onProfile}){
     
-    const [data,setData] = useState("")
-    useEffect(()=>{
-        hitCardData().then((response)=>{setData(response)})
-    },[])
+    const [data, setData] = useState("")
+    const [query, setQuery] = useState("");
+    const [state, setState] = useState({});
+
+    const { status, data: profile, error } = state;
+
+    useEffect(() => {
+        if (query === "") return;
+        setState({ status: "pending", data: null, error: null });
+    
+        getGitProfile(query)
+          .then((data) => {
+            onProfile(data);
+            setState({ status: "success", data: data, error: null });
+          })
+          .catch((error) => {
+            setState({
+              status: "error",
+              data: null,
+              error: error.message,
+            });
+          });
+      }, [query, onProfile, setState]);
 
     console.log(data)
     console.log(data.login)
@@ -105,6 +134,31 @@ function InfoCard({ query, setQueryFunction}){
                 onChange={setQueryFunction}
                 />
             </form>
+                {status === "pending" && "Retrieving user..."}
+
+                {status === "success" && query !== "" && (
+                    <ProfileData
+                    profile={profile}
+                    favorites={favorites}
+                    onAddFavorite={onAddFavorite}
+                    onRemoveFavorite={onRemoveFavorite}
+                    />
+                )}
+
+                {profile && query !== "" ? (
+                    ""
+                ) : (
+                    <Img
+                    src=""
+                    alt="logo"
+                    />
+                )}
+
+                {query === "" && "No user..."}
+
+                {status === "error" && query !== "" && (
+                    <p style={{ color: "red" }}>{error.message}</p>
+                )}
             <ProfilePicture>
                 <img src={data.avatar_url} alt="face" />
             </ProfilePicture>
