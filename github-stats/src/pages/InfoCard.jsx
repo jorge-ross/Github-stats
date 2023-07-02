@@ -5,7 +5,7 @@ import LinkCard from "../components/link-card";
 import {FaUsers} from 'react-icons/fa';
 import {RiUserHeartFill, RiBookMarkFill, RiCodeBoxFill, RiStarFill, RiStarLine } from 'react-icons/ri'
 
-const Div = styled("div")`
+const Container = styled("div")`
     display: flex;
     place-items: center;
     flex-direction:column;
@@ -14,16 +14,18 @@ const Div = styled("div")`
     background-color: #f2f2f2;
 `
 
-const NameContainer = styled("div")`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-`
-const ProfilePicture = styled("div")`
+const NameContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  height: 25px;
+`;
+const ProfilePicture = styled.img`
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    overflow: hidden;
 `
 const Stats = styled("div")`
     width: 296px;
@@ -34,28 +36,34 @@ const Stats = styled("div")`
     gap: 16px;
 `
 
-
-const ContainerBottom = styled("div")`
-    width: 100%;
-    height: 65px;
-    border-top: 2px solid #828282;
-    position: absolute;
-    bottom: 0; 
-    padding: 0 16px;
-    display: grid;
-    place-items: center;
-`
-const ContainerItems = styled("div")`
-    display: flex;
-    gap: 50px;
-    flex-direction: row;
-`
-const UserName = styled.p`
+// const ContainerBottom = styled("div")`
+//     width: 100%;
+//     height: 65px;
+//     border-top: 2px solid #828282;
+//     position: absolute;
+//     bottom: 0; 
+//     padding: 0 16px;
+//     display: grid;
+//     place-items: center;
+// `
+// const ContainerItems = styled("div")`
+//     display: flex;
+//     gap: 50px;
+//     flex-direction: row;
+// `
+const ProfileName = styled.p`
   display: flex;
   min-width: 132px;
   gap: 0.5rem;
-  ${typography.text.lg};
+  ${typography.text.xl};
 `;
+
+const ProfileBio = styled.p`
+  width: 360px;
+  ${typography.text.md};
+  text-align: center;
+`;
+
 
 const FavoriteButton = styled.button`
   display: flex;
@@ -72,13 +80,13 @@ const FavoriteButton = styled.button`
 function InfoCard({ profile, favorites, onAddFavorite, onRemoveFavorite }){
   const regularContent = (
     <>
-      <RiStarLine color={"#828282"} style={{ fontSize: "1.3rem" }} />
+      <RiStarLine color={"#828282"} size={25} />
     </>
   );
 
   const favoriteContent = (
     <>
-      <RiStarFill color={colors.yellow[500]} style={{ fontSize: "1.3rem" }} />
+      <RiStarFill color={colors.yellow[500]} size={25}/>
     </>
   );
 
@@ -89,10 +97,10 @@ function InfoCard({ profile, favorites, onAddFavorite, onRemoveFavorite }){
     // console.log(data.login)
     // console.log(data.bio)
     return(
-    <Div>      
+    <Container>      
       <ProfilePicture src={profile?.avatar_url}/>
       <NameContainer>
-        <UserName>{profile?.name}</UserName>
+        <ProfileName>{profile?.name}</ProfileName>
         <FavoriteButton
           onClick={() =>
             isFavorite ? onRemoveFavorite(profile) : onAddFavorite(profile)
@@ -101,39 +109,39 @@ function InfoCard({ profile, favorites, onAddFavorite, onRemoveFavorite }){
           {isFavorite ? favoriteContent : regularContent}
         </FavoriteButton>
       </NameContainer>
-      <p> {profile?.bio} </p>
+      <ProfileBio> {profile?.bio} </ProfileBio>
         <Stats>
             <LinkCard
             icon={<FaUsers />}
-            text={"followers"}
-            amount={profile?.followers}
+            subtitle={"followers"}
+            numStat={profile?.followers}
             url={`users/${profile?.login}/followers`}
             color={"#2D9CDB"}
             />
             <LinkCard
             icon={<RiUserHeartFill />}
-            text={"followings"}
-            amount={profile?.following}
+            subtitle={"followings"}
+            numStat={profile?.following}
             url={`users/${profile?.login}/followings`}
             color={"#F2994A"}
             />
             <LinkCard
             icon={<RiBookMarkFill />}
-            text={"public repos"}
-            amount={profile?.public_repos}
+            subtitle={"public repos"}
+            numStat={profile?.public_repos}
             url={`users/${profile?.login}/repos`}
             color={"#219653"}
             />
             <LinkCard
             icon={<RiCodeBoxFill />}
-            text={"public gists"}
-            amount={profile?.public_gists}
+            subtitle={"public gists"}
+            numStat={profile?.public_gists}
             url={"/"}
             color={"#828282"}
             />
       </Stats>
             
-    </Div>
+    </Container>
     )
 }
 
