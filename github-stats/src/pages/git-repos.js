@@ -35,8 +35,6 @@ const Description = styled("p")`
   line-height: 15.08px;
 `;
 
-// BsCircleFill;
-
 const GitRepo = ({
   fork = 0,
   stars = 0,

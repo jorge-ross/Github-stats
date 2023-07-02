@@ -1,10 +1,30 @@
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import Input from "../components/input";
 import { getGitProfile } from "../services/gitapi-service";
-import ProfileData from "./profile-data";
 import InfoCard from "../components/InfoCard/InfoCard";
+
+const Container = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const Form = styled("form")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 400;
+`;
+
+const Img = styled("img")`
+  witdh: 7.5rem;
+  height: 7.5rem;
+`;
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   const [query, setQuery] = useState("");
@@ -31,22 +51,42 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   }, [query, onProfile, setState]);
 
   return (
-    <div>
-      {status === "pending" && "Retrieving user..."}
-      {status === "success" && query !== "" && (
-        <ProfileData
-          profile={profile}
-          onAddFavorite={onAddFavorite}
-          onRemoveFavorite={onRemoveFavorite}
-          favorites={favorites}
+    <Container>
+      <Form>
+        <Input
+          name="query"
+          placeholder="username"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
         />
-      )}
-      {status === "error" && <p style={{ color: "red" }}>{error}</p>}
-      <InfoCard
-        query={query}
-        setQueryFunction={(event) => setQuery(event.target.value)}
-      />
-    </div>
+      </Form>
+
+      <div>
+        {status === "pending" && "Retrieving user..."}
+        {status === "success" && query !== "" && (
+          <InfoCard
+            profile={profile}
+            onAddFavorite={onAddFavorite}
+            onRemoveFavorite={onRemoveFavorite}
+            favorites={favorites}
+          />
+        )}
+        {profile && query !== "" ? (
+          ""
+        ) : (
+          <Img
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            alt="github"
+          />
+        )}
+
+        {query === "" && "No user..."}
+
+        {status === "error" && query !== "" && (
+          <p style={{ color: "red" }}>{error.message}</p>
+        )}
+      </div>
+    </Container>
   );
 }
 
