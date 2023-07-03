@@ -29,7 +29,7 @@ function SignupForm() {
   }
 
   return (
-    <MainContainer>
+    <div>
       <MainContainer onSubmit={handleSubmit}>
         <Input
           id="email"
@@ -63,7 +63,7 @@ function SignupForm() {
         />
         <ValidButton type="submit">Create Account</ValidButton>
       </MainContainer>
-    </MainContainer>
+    </div>
   );
 }
 

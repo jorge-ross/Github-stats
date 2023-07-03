@@ -21,7 +21,7 @@ export const ValidButton = styled("button")`
   }
 `;
 
-export const MainContainer = styled("div")`
+export const MainContainer = styled("form")`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,7 +49,7 @@ function LoginForm() {
   }
 
   return (
-    <MainContainer>
+    <div>
       <MainContainer onSubmit={handleSubmit}>
         <Input
           id="email"
@@ -71,7 +71,7 @@ function LoginForm() {
         />
         <ValidButton type="submit">Login</ValidButton>
       </MainContainer>
-    </MainContainer>
+    </div>
   );
 }
 
