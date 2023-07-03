@@ -1,7 +1,32 @@
 import { useState } from "react";
+import styled from "@emotion/styled";
 
 import Input from "./input";
 import { useAuth } from "../context/auth-context";
+
+export const ValidButton = styled("button")`
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  border-radius: 4px;
+  background: #2d9cdb;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  color: white;
+  transition: 1s;
+  &:hover {
+    background-color: #80d1ff;
+  }
+`;
+
+export const MainContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+`;
 
 function LoginForm() {
   const { login } = useAuth();
@@ -24,8 +49,8 @@ function LoginForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <MainContainer>
+      <MainContainer onSubmit={handleSubmit}>
         <Input
           id="email"
           type="email"
@@ -44,9 +69,9 @@ function LoginForm() {
           placeholder="********"
           label="Password"
         />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+        <ValidButton type="submit">Login</ValidButton>
+      </MainContainer>
+    </MainContainer>
   );
 }
 

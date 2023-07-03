@@ -19,6 +19,7 @@ function Input({
   return (
     <div>
       {label ? <label htmlFor={id || name}>{label}</label> : ""}
+      <br />
       <StyledInput
         id={id || name}
         type={type}
