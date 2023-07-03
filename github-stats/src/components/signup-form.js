@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { MainContainer, ValidButton } from "./loginform";
 import Input from "./input";
 import { useAuth } from "../context/auth-context";
 
@@ -28,8 +29,8 @@ function SignupForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <MainContainer>
+      <MainContainer onSubmit={handleSubmit}>
         <Input
           id="email"
           type="email"
@@ -60,9 +61,9 @@ function SignupForm() {
           onChange={handleChange}
           label="Last Name"
         />
-        <button type="submit">Create Account</button>
-      </form>
-    </div>
+        <ValidButton type="submit">Create Account</ValidButton>
+      </MainContainer>
+    </MainContainer>
   );
 }
 
