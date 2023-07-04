@@ -36,21 +36,6 @@ const Stats = styled("div")`
     gap: 16px;
 `
 
-// const ContainerBottom = styled("div")`
-//     width: 100%;
-//     height: 65px;
-//     border-top: 2px solid #828282;
-//     position: absolute;
-//     bottom: 0; 
-//     padding: 0 16px;
-//     display: grid;
-//     place-items: center;
-// `
-// const ContainerItems = styled("div")`
-//     display: flex;
-//     gap: 50px;
-//     flex-direction: row;
-// `
 const ProfileName = styled.p`
   display: flex;
   min-width: 132px;

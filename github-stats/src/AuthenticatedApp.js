@@ -8,6 +8,7 @@ import FavoritesPage from "./pages/favorites-page";
 import FollowersPage from "./pages/followers-page";
 import FollowingPage from "./pages/following-page";
 import ReposPage from "./pages/repo-page";
+import Navbar from "./components/navbar";
 
 import {
   createFavorite,
@@ -90,6 +91,7 @@ function AuthenticatedApp() {
           />
         </Route>
       </Routes>
+      <Navbar></Navbar>
     </Div>
   );
 }
