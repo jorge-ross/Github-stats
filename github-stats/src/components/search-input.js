@@ -7,7 +7,7 @@ const StyledInput = styled("input")`
   }
 `;
 
-function Input({
+function SearchInput({
   id,
   type = "text",
   name,
@@ -27,9 +27,10 @@ function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        style={{ textAlign: "center" }}
       />
     </div>
   );
 }
 
-export default Input;
+export default SearchInput;

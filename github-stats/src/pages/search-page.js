@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import Input from "../components/input";
+import SearchInput from "../components/search-input";
 import { getGitProfile } from "../services/gitapi-service";
 import InfoCard from "./InfoCard";
 
@@ -16,6 +16,8 @@ const Form = styled("form")`
   display: flex;
   flex-direction: column;
   font-weight: 400;
+  place-items: center;
+  text-align: center;
 `;
 
 const Img = styled("img")`
@@ -59,12 +61,11 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
   return (
     <Container>
       <Form>
-        <Input
+        <SearchInput
           name="query"
           placeholder="username"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          className="centered-placeholder"
         />
       </Form>
 

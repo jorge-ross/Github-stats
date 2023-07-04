@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { colors, typography } from "../styles";
-import InfoCard from "../pages/InfoCard";
+
 import { useAuth } from "../context/auth-context";
 import Input from "./input";
 
