@@ -30,10 +30,7 @@ export const MainContainer = styled("form")`
 
 function LoginForm() {
   const { login } = useAuth();
-  const [formData, setFormData] = useState({
-    email: "testino@mail.com",
-    password: "letmein",
-  });
+  const [formData, setFormData] = useState({});
 
   const { email, password } = formData;
 

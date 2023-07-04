@@ -27,6 +27,7 @@ function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        style={{ textAlign: "center" }}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth-context";
+
 import Input from "../components/input";
 import { getGitProfile } from "../services/gitapi-service";
 import InfoCard from "./InfoCard";
@@ -16,14 +15,21 @@ const Container = styled("div")`
 const Form = styled("form")`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   font-weight: 400;
 `;
 
 const Img = styled("img")`
   witdh: 7.5rem;
   height: 7.5rem;
+`;
+
+const Searching = styled("div")`
+  text-align: center;
+  font-size: 20px;
+  font-family: Source Code Pro;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 
 function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
@@ -58,6 +64,7 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
           placeholder="username"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
+          className="centered-placeholder"
         />
       </Form>
 
@@ -79,12 +86,14 @@ function SearchPage({ favorites, onAddFavorite, onRemoveFavorite, onProfile }) {
             alt="github"
           />
         )}
+        <br />
+        <Searching>
+          {query === "" && "No user..."}
 
-        {query === "" && "No user..."}
-
-        {status === "error" && query !== "" && (
-          <p style={{ color: "red" }}>{error.message}</p>
-        )}
+          {status === "error" && query !== "" && (
+            <p style={{ color: "red" }}>{error.message}</p>
+          )}
+        </Searching>
       </div>
     </Container>
   );
