@@ -16,8 +16,15 @@ import {
   getFavorites,
 } from "./services/favorites-service";
 
+const GralContainer = styled.div`
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+`;
+
 const Div = styled("div")`
   display: flex;
+  flex-direction: column;
   height: 731px;
   width: 411px;
   justify-items: center;
@@ -56,43 +63,45 @@ function AuthenticatedApp() {
   }
 
   return (
-    <Div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <SearchPage
-              favorites={favorites}
-              onAddFavorite={handleAddFavorite}
-              onRemoveFavorite={handleRemoveFavorite}
-              onProfile={setProfile}
+    <GralContainer>
+      <Div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <SearchPage
+                favorites={favorites}
+                onAddFavorite={handleAddFavorite}
+                onRemoveFavorite={handleRemoveFavorite}
+                onProfile={setProfile}
+              />
+            }
+          />
+          <Route path="profile" element={<UpdateForm />} />
+
+          <Route
+            path="favorites"
+            element={<FavoritesPage favorites={favorites} />}
+          />
+
+          <Route path="/users/:username">
+            <Route
+              path="followers"
+              element={<FollowersPage profile={profile}></FollowersPage>}
             />
-          }
-        />
-        <Route path="profile" element={<UpdateForm />} />
-
-        <Route
-          path="favorites"
-          element={<FavoritesPage favorites={favorites} />}
-        />
-
-        <Route path="/users/:username">
-          <Route
-            path="followers"
-            element={<FollowersPage profile={profile}></FollowersPage>}
-          />
-          <Route
-            path="followings"
-            element={<FollowingPage profile={profile}></FollowingPage>}
-          />
-          <Route
-            path="repos"
-            element={<ReposPage profile={profile}></ReposPage>}
-          />
-        </Route>
-      </Routes>
-      <Navbar></Navbar>
-    </Div>
+            <Route
+              path="followings"
+              element={<FollowingPage profile={profile}></FollowingPage>}
+            />
+            <Route
+              path="repos"
+              element={<ReposPage profile={profile}></ReposPage>}
+            />
+          </Route>
+        </Routes>
+        <Navbar></Navbar>
+      </Div>
+    </GralContainer>
   );
 }
 

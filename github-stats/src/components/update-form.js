@@ -5,14 +5,18 @@ import { useAuth } from "../context/auth-context";
 import Input from "./input";
 
 const Wrapper = styled.div`
-display: flex,
-flex-direction: column,
-align-items: center,
-align-self: center,`;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  height: 640px;
+  gap: 32px;
+`;
 
 const Title = styled.div`
   font-size: 32px;
   font-weight: 400;
+  padding: 16px 0;
 `;
 
 function UpdateForm() {
