@@ -15,6 +15,12 @@ const CustomLink = styled("button")`
   }
 `;
 
+const GralContainer = styled.div`
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+`;
+
 const MainContainer = styled("div")`
   width: 411px;
   height: 731px;
@@ -56,18 +62,20 @@ function UnauthenticatedApp() {
   }
 
   return (
-    <MainContainer>
-      <MainTitle>Welcome to Github Stats</MainTitle>
-      {showLogin ? <LoginForm /> : <SignupForm />}
+    <GralContainer>
+      <MainContainer>
+        <MainTitle>Welcome to Github Stats</MainTitle>
+        {showLogin ? <LoginForm /> : <SignupForm />}
 
-      <CustomLink onClick={handleLinkClick}>
-        {showLogin ? (
-          <AccesOption>Create Account</AccesOption>
-        ) : (
-          <AccesOption>Login</AccesOption>
-        )}
-      </CustomLink>
-    </MainContainer>
+        <CustomLink onClick={handleLinkClick}>
+          {showLogin ? (
+            <AccesOption>Create Account</AccesOption>
+          ) : (
+            <AccesOption>Login</AccesOption>
+          )}
+        </CustomLink>
+      </MainContainer>
+    </GralContainer>
   );
 }
 
