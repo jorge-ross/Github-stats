@@ -19,7 +19,8 @@ const Title = styled.h1`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 0px;
   gap: 16px;
 `;
@@ -30,6 +31,7 @@ const FollowersContainer = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
+  height: 600px;
 `;
 
 const FollowersCard = styled("div")`

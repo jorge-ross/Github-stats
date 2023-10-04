@@ -22,9 +22,9 @@ const MainTitle = styled.h1`
 const Wrapper = styled("div")`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
+  height: 600px;
 `;
 
 const FollowingContainer = styled.div`

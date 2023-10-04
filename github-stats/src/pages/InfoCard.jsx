@@ -12,6 +12,7 @@ const Container = styled("div")`
     gap: 16px;
     position: relative;
     background-color: #f2f2f2;
+    height: 520px;
 `
 
 const NameContainer = styled.div`
