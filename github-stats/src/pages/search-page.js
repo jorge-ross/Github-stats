@@ -19,6 +19,7 @@ const Form = styled("form")`
   font-weight: 400;
   place-items: center;
   text-align: center;
+  padding-bottom: 16px;
 `;
 
 const Img = styled("img")`

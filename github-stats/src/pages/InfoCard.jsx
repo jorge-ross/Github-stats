@@ -18,7 +18,7 @@ const Container = styled("div")`
 const NameContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   gap: 4px;
   height: 25px;
@@ -42,6 +42,7 @@ const ProfileName = styled.p`
   min-width: 132px;
   gap: 0.5rem;
   ${typography.text.xl};
+  justify-content: center;
 `;
 
 const ProfileBio = styled.p`
@@ -79,9 +80,7 @@ function InfoCard({ profile, favorites, onAddFavorite, onRemoveFavorite }){
   const isFavorite = Boolean(
     favorites?.find((fav) => fav.username === profile?.login)
   );
-    // console.log(data)
-    // console.log(data.login)
-    // console.log(data.bio)
+
     return(
     <Container>      
       <ProfilePicture src={profile?.avatar_url}/>

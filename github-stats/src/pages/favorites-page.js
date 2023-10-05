@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import FavoriteCard from "../components/favorite-card";
 import { useState } from "react";
 import { colors, typography } from "../styles";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import { RiStarFill } from "react-icons/ri";
 
 const Wrapper = styled("div")`
   display: flex;
@@ -18,7 +20,7 @@ const PageNav = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 0 8px;
   gap: 8px;
   width: 202px;
   height: 30px;
@@ -31,14 +33,23 @@ const PagButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 8px;
+  padding: 2px 4px;
   gap: 10px;
-  border-radius: 50%;
+  border-radius: 50px;
+  width: 26px;
+  height: 22px;
   cursor: pointer;
 `;
 
 const FavTitle = styled.p`
   ${typography.head.lg};
+  padding-bottom: 8px;
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
 `;
 
 function FavoritesPage({ favorites }) {
@@ -77,7 +88,7 @@ function FavoritesPage({ favorites }) {
           onClick={handlePreviousPage}
           style={{ cursor: "pointer", height: "25px", width: "25px" }}
         />
-        {[...Array(pageNumber)].map((x, index) => (
+        {[...Array(pageNumber)].map((page, index) => (
           <PagButton key={index} current={page}>
             {index + 1}
           </PagButton>
@@ -87,7 +98,23 @@ function FavoritesPage({ favorites }) {
           style={{ cursor: "pointer", height: "25px", width: "25px" }}
         />
       </PageNav>
-      <Link to="/">Go back</Link>
+
+      <CardWrapper>
+        {groupByCategory[`${page}`]?.map((fav, index) => (
+          <FavoriteCard
+            key={index}
+            username={fav.username}
+            name={fav.name}
+            avatar={fav.avatar_url}
+            icon={
+              <RiStarFill
+                color={colors.yellow[500]}
+                style={{ height: "24px", width: "25px" }}
+              />
+            }
+          ></FavoriteCard>
+        ))}
+      </CardWrapper>
     </Wrapper>
   );
 }
