@@ -7,16 +7,9 @@ import { getProfileFollowings } from "../services/gitapi-service";
 import { GrFormPrevious, GrNext } from "react-icons/gr";
 
 const MainTitle = styled.h1`
+  ${typography.head.lg}
   display: flex;
-  margin-bottom: 96px;
-  font-size: 28px;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  margin: 8px 0;
 `;
 
 const Wrapper = styled("div")`
@@ -24,7 +17,7 @@ const Wrapper = styled("div")`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  height: 600px;
+  height: 700px;
 `;
 
 const FollowingContainer = styled.div`

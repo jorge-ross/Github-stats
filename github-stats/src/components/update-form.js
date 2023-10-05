@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   align-self: center;
-  height: 600px;
+  height: 700px;
   gap: 32px;
 `;
 

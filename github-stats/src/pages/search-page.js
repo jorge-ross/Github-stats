@@ -10,7 +10,7 @@ const Container = styled("div")`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  height: 600px;
+  height: 700px;
 `;
 
 const Form = styled("form")`
