@@ -98,6 +98,14 @@ function FollowersPage({ profile }) {
       .catch(console.log);
   }, [profile, page]);
 
+  const pagesToShow = 5;
+  const startPage = Math.max(1, page - Math.floor(pagesToShow - 1));
+  const endPage = Math.min(pageNumber, startPage + pagesToShow - 1);
+
+  const pageNumbers = [...Array(endPage - startPage + 1).keys()].map(
+    (i) => startPage + i
+  );
+
   return (
     <Wrapper>
       <Title>Followers ({profile.followers})</Title>
@@ -105,11 +113,12 @@ function FollowersPage({ profile }) {
         <GrFormPrevious
           onClick={handlePrevPage}
           style={{ cursor: "pointer", height: "16px", width: "16px" }}
+          disabled={page === 1}
         />
 
-        {[...Array(pageNumber)].slice(0, 5).map((_, index) => (
-          <PagingButton key={index} current={page}>
-            {index + 1}
+        {pageNumbers.map((pageNumber) => (
+          <PagingButton key={pageNumber} current={page}>
+            {pageNumber}
           </PagingButton>
         ))}
 
