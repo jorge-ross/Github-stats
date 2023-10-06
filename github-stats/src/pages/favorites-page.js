@@ -21,26 +21,26 @@ const PageNav = styled.div`
   justify-content: center;
   padding: 0 8px;
   gap: 8px;
-  width: 202px;
+  width: 100%;
   height: 30px;
 `;
 
 const PagButton = styled.button`
   all: unset;
-  color: ${colors.white};
-  background: ${colors.blue[500]};
-  display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 2px 4px;
+  color: ${({ current, children }) =>
+    current === children ? "#fff" : "#00000"};
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
   gap: 10px;
+  background: ${({ current, children }) =>
+    current === children ? "#2d9cdb" : ""};
   border-radius: 50px;
-  width: 26px;
-  height: 22px;
-  cursor: pointer;
+  width: 10px;
 `;
 
-const FavTitle = styled.p`
+const FavTitle = styled.h1`
   ${typography.head.lg};
   padding-bottom: 8px;
 `;
@@ -85,16 +85,16 @@ function FavoritesPage({ favorites }) {
       <PageNav>
         <GrFormPrevious
           onClick={handlePreviousPage}
-          style={{ cursor: "pointer", height: "25px", width: "25px" }}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
         />
-        {[...Array(pageNumber)].map((page, index) => (
+        {[...Array(pageNumber)].map((_, index) => (
           <PagButton key={index} current={page}>
             {index + 1}
           </PagButton>
         ))}
         <GrFormNext
           onClick={handleNextPage}
-          style={{ cursor: "pointer", height: "25px", width: "25px" }}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
         />
       </PageNav>
 

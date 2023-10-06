@@ -2,18 +2,11 @@ import styled from "@emotion/styled";
 import { typography } from "../styles";
 import { useEffect, useState } from "react";
 import { getProfileFollowers } from "../services/gitapi-service";
-import { GrFormPrevious, GrNext } from "react-icons/gr";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const Title = styled.h1`
-  display: flex;
-  margin-bottom: 96px;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 2em;
+  ${typography.head.lg};
+  padding-bottom: 8px;
 `;
 
 const Wrapper = styled.div`
@@ -21,17 +14,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0px;
   gap: 16px;
+  height: 100%;
 `;
 
 const FollowersContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   gap: 16px;
-  height: 600px;
 `;
 
 const FollowersCard = styled("div")`
@@ -53,13 +44,10 @@ const Paging = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 0 8px;
   gap: 8px;
-  width: 202px;
+  width: 100%;
   height: 30px;
-  svg {
-    font-size: 4rem;
-  }
 `;
 
 const FollowersImage = styled.img`
@@ -70,16 +58,17 @@ const FollowersImage = styled.img`
 
 const PagingButton = styled.button`
   all: unset;
-  text-align: center;
+  align-items: center;
   color: ${({ current, children }) =>
     current === children ? "#fff" : "#00000"};
   display: flex;
   flex-direction: column;
-  padding: 1px 8px;
+  padding: 0 8px;
   gap: 10px;
   background: ${({ current, children }) =>
     current === children ? "#2d9cdb" : ""};
   border-radius: 50px;
+  width: 10px;
 `;
 
 function FollowersPage({ profile }) {
@@ -113,7 +102,10 @@ function FollowersPage({ profile }) {
     <Wrapper>
       <Title>Followers ({profile.followers})</Title>
       <Paging>
-        <GrFormPrevious size={16} onClick={handlePrevPage} />
+        <GrFormPrevious
+          onClick={handlePrevPage}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
+        />
 
         {[...Array(pageNumber)].slice(0, 5).map((_, index) => (
           <PagingButton key={index} current={page}>
@@ -121,7 +113,10 @@ function FollowersPage({ profile }) {
           </PagingButton>
         ))}
 
-        <GrNext size={16} onClick={handleNextPage} />
+        <GrFormNext
+          onClick={handleNextPage}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
+        />
       </Paging>
 
       <FollowersContainer>

@@ -25,7 +25,7 @@ const GralContainer = styled.div`
 const Div = styled("div")`
   display: flex;
   flex-direction: column;
-  height: 731px;
+  height: 700px;
   width: 411px;
   justify-items: center;
 `;
