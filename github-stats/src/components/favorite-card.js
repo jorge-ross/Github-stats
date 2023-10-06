@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 
 const CardContainer = styled.div`
   font-family: "Source Code Pro";

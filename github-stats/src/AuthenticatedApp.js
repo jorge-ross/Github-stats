@@ -32,11 +32,7 @@ const Div = styled("div")`
 
 function AuthenticatedApp() {
   const [favorites, setFavorites] = useState([]);
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    getFavorites().then(setFavorites);
-  }, []);
+  const [profile, setProfile] = useState();
 
   function handleAddFavorite(profile) {
     const data = {
@@ -50,12 +46,18 @@ function AuthenticatedApp() {
       .catch(console.log);
   }
 
+  useEffect(() => {
+    getFavorites().then(setFavorites);
+  }, []);
+
   function handleRemoveFavorite(profile) {
-    const favorite = favorites.find((fav) => fav.username === profile?.name);
+    const favorite = favorites.find(
+      (fav) => fav.avatar_url === profile?.avatar_url
+    );
 
     removeFavorite(favorite.id).then(() => {
       const newFavorites = favorites.filter(
-        (fav) => fav.username !== profile?.name
+        (fav) => fav.username !== profile?.login
       );
 
       setFavorites(newFavorites);
@@ -87,16 +89,13 @@ function AuthenticatedApp() {
           <Route path="/users/:username">
             <Route
               path="followers"
-              element={<FollowersPage profile={profile}></FollowersPage>}
+              element={<FollowersPage profile={profile} />}
             />
             <Route
               path="followings"
-              element={<FollowingPage profile={profile}></FollowingPage>}
+              element={<FollowingPage profile={profile} />}
             />
-            <Route
-              path="repos"
-              element={<ReposPage profile={profile}></ReposPage>}
-            />
+            <Route path="repos" element={<ReposPage profile={profile} />} />
           </Route>
         </Routes>
         <Navbar></Navbar>

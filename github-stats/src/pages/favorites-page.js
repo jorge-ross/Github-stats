@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 import FavoriteCard from "../components/favorite-card";
 import { useState } from "react";
 import { colors, typography } from "../styles";
