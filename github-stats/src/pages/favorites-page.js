@@ -79,6 +79,14 @@ function FavoritesPage({ favorites }) {
     return ac;
   }, {});
 
+  const pagesToShow = 5;
+  const startPage = Math.max(1, page - Math.floor(pagesToShow - 1));
+  const endPage = Math.min(pageNumber, startPage + pagesToShow - 1);
+
+  const pageNumbers = [...Array(endPage - startPage + 1).keys()].map(
+    (i) => startPage + i
+  );
+
   return (
     <Wrapper>
       <FavTitle>Favorites ({favorites.length})</FavTitle>
@@ -87,9 +95,9 @@ function FavoritesPage({ favorites }) {
           onClick={handlePreviousPage}
           style={{ cursor: "pointer", height: "16px", width: "16px" }}
         />
-        {[...Array(pageNumber)].map((_, index) => (
-          <PagButton key={index} current={page}>
-            {index + 1}
+        {pageNumbers.map((pageNumber) => (
+          <PagButton key={pageNumber} current={page}>
+            {pageNumber}
           </PagButton>
         ))}
         <GrFormNext
