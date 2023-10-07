@@ -1,15 +1,13 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { typography } from "../styles";
 import { getProfileFollowings } from "../services/gitapi-service";
-import { GrFormPrevious, GrNext } from "react-icons/gr";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const MainTitle = styled.h1`
   ${typography.head.lg}
-  display: flex;
-  margin: 8px 0;
+  padding-top: 16px;
 `;
 
 const Wrapper = styled("div")`
@@ -17,14 +15,13 @@ const Wrapper = styled("div")`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  height: 700px;
+  height: 100%;
 `;
 
 const FollowingContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   gap: 16px;
 `;
 
@@ -47,13 +44,10 @@ const Paging = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 0 8px;
   gap: 8px;
-  width: 202px;
+  width: 100%;
   height: 30px;
-  svg {
-    font-size: 4rem;
-  }
 `;
 
 const PagingButton = styled.button`
@@ -63,11 +57,12 @@ const PagingButton = styled.button`
     current === children ? "#fff" : "#00000"};
   display: flex;
   flex-direction: column;
-  padding: 1px 8px;
+  padding: 0 8px;
   gap: 10px;
   background: ${({ current, children }) =>
     current === children ? "#2d9cdb" : ""};
   border-radius: 50px;
+  width: 10px;
 `;
 
 const FollowingImage = styled.img`
@@ -80,7 +75,7 @@ function FollowingPage({ profile }) {
   const [followings, setFollowings] = useState([]);
   const [page, setPage] = useState(1);
 
-  const pageNumber = Math.ceil(profile.followers / 7);
+  const pageNumber = Math.ceil(profile.following / 7);
 
   function handlePrevPage() {
     if (page === 1) return;
@@ -103,20 +98,35 @@ function FollowingPage({ profile }) {
       .catch(console.log);
   }, [profile, page]);
 
+  const pagesToShow = 5;
+  const startPage = Math.max(1, page - Math.floor(pagesToShow - 1));
+  const endPage = Math.min(pageNumber, startPage + pagesToShow - 1);
+
+  const pageNumbers = [...Array(endPage - startPage + 1).keys()].map(
+    (i) => startPage + i
+  );
+
   return (
     <Wrapper>
       <MainTitle>Followings ({profile.following})</MainTitle>
 
       <Paging>
-        <GrFormPrevious size={16} onClick={handlePrevPage} />
+        <GrFormPrevious
+          onClick={handlePrevPage}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
+          disabled={page === 1}
+        />
 
-        {[...Array(pageNumber)].slice(0, 5).map((_, index) => (
-          <PagingButton key={index} current={page}>
-            {index + 1}
+        {pageNumbers.map((pageNumber) => (
+          <PagingButton key={pageNumber} current={page}>
+            {pageNumber}
           </PagingButton>
         ))}
 
-        <GrNext size={16} onClick={handleNextPage} />
+        <GrFormNext
+          onClick={handleNextPage}
+          style={{ cursor: "pointer", height: "16px", width: "16px" }}
+        />
       </Paging>
 
       <FollowingContainer>
@@ -127,17 +137,6 @@ function FollowingPage({ profile }) {
           </FollowingCard>
         ))}
       </FollowingContainer>
-      <Link
-        style={{
-          textDecoration: "none",
-          color: "#2D9CDB",
-          fontWeight: "500",
-          fontSize: "16px",
-        }}
-        to="/"
-      >
-        Go back{" "}
-      </Link>
     </Wrapper>
   );
 }
