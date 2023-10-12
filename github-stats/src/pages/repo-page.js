@@ -1,25 +1,25 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
-import GitRepo from "./git-repos";
 import { getRepos } from "../services/gitapi-service";
+
+import { typography } from "../styles";
+import GitRepo from "../components/git-repos";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const PublicRepos = styled("p")`
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 35px;
-  text-align: center;
+const MainTitle = styled.h1`
+  ${typography.head.lg}
+  padding-top: 16px;
 `;
 
-const ContainerRepos = styled("div")`
+const Wrapper = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  height: 100%;
 `;
 
-const ContainerPage = styled("div")`
-  padding: 1rem 0;
+const ContainerRepos = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,7 +37,7 @@ const Paging = styled.div`
   height: 30px;
 `;
 
-const PagButton = styled.button`
+const PagingButton = styled.button`
   all: unset;
   text-align: center;
   color: ${({ current, children }) =>
@@ -56,7 +56,7 @@ const ReposPage = ({ profile }) => {
   const [repos, setRepos] = useState([]);
   const [page, setPage] = useState(1);
 
-  const pageNumber = Math.ceil(profile.repos / 7);
+  const pageNumber = Math.ceil(profile.public_repos / 7);
 
   function handlePrevPage() {
     if (page === 1) return;
@@ -88,8 +88,8 @@ const ReposPage = ({ profile }) => {
   );
 
   return (
-    <ContainerPage>
-      <PublicRepos>Public Repos ({repos.length})</PublicRepos>
+    <Wrapper>
+      <MainTitle>Public Repos ({profile.public_repos})</MainTitle>
 
       <Paging>
         <GrFormPrevious
@@ -99,9 +99,9 @@ const ReposPage = ({ profile }) => {
         />
 
         {pageNumbers.map((pageNumber) => (
-          <PagButton key={pageNumber} current={page}>
+          <PagingButton key={pageNumber} current={page}>
             {pageNumber}
-          </PagButton>
+          </PagingButton>
         ))}
 
         <GrFormNext
@@ -125,7 +125,7 @@ const ReposPage = ({ profile }) => {
           );
         })}
       </ContainerRepos>
-    </ContainerPage>
+    </Wrapper>
   );
 };
 
